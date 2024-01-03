@@ -31,44 +31,53 @@
 // Клиент Мария заказала: Суши "Калифорния" и Пиццу "Маргарита".
 // Клиент Ирина заказала: Чизкейк.
 
+
+// I. Map: повар => специализация
 // 1. Map будет использоваться для хранения соответствия между поварами и их специализацией
+// 2. Set будет использоваться для хранения уникальных поваров,
 
+let chefs = new Map();
+
+chefs.set("Виктор", "Пицца");
+chefs.set("Ольга", "Суши");
+chefs.set("Дмитрий", "Десерты");
+
+// II. Map: блюдо => повар
 // 1. Map будет использоваться для хранения соответствия между блюдами и их поварами
+// 2. Set будет использоваться для хранения уникальных блюд,
+//  которые приготовил повар
+
+let dishes = new Map();
+
+dishes.set("Пицца 'Маргарита'", "Виктор");
+dishes.set("Пицца 'Пепперони'", "Виктор");
+dishes.set("Суши 'Филадельфия'", "Ольга");
+dishes.set("Суши 'Калифорния'", "Ольга");
+dishes.set("Тирамису", "Дмитрий");
+dishes.set("Чизкейк", "Дмитрий");
 
 
-// 1. Map: урок => преподаватель
-let lessons = new Map();
-// "Математика", "Смирнов"
-// "История", "Иванова"
+// III. Map: клиент => Set заказ
+let clients = new Map();
 
-lessons.set("Математика", "Смирнов");
-lessons.set("История", "Иванова");
+let aleksey = { name: "Алексей" };
+let alekseyDishes = new Set();
+alekseyDishes.add(["Пицца 'Пепперони","Тирамису"]);
 
-// 2. Map: студент => Set уроков
-let students = new Map();
-let ivan = { name: "Ivan" };
-let ivanLessons = new Set();
-ivanLessons.add(["Математика","История"]);
+let maria = { name: "Мария" };
+let mariaDishes = new Set();
+mariaDishes.add(["Суши 'Калифорния'","Пицца 'Маргарита'"]);
 
-let elena = { name: "Elena" };
-let elenaLessons = new Set();
-// elenaLessons.add(["Математика","История","Рус яз","Физра"]);
-// elenaLessons.add(["Математика","История","Рус яз","Физра", "Стрельба:)))))"]);
-
-elenaLessons.add("Математика");
-elenaLessons.add("История");
-elenaLessons.add("Математика");
+let irina = { name: "Ирина" };
+let irinaDishes = new Set();
+irinaDishes.add(["Чизкейк"]);
 
 
+clients.set(aleksey, alekseyDishes);
+clients.set(maria, mariaDishes);
+clients.set(irina, irinaDishes);
 
-
-
-
-students.set(ivan, ivanLessons);
-students.set(elena, elenaLessons);
 
 // Проверка:
-console.log(`Преподаватель по Математике: ${lessons.get("Математика")}`); // Смирнов
-console.log(`Уроки Ивана: ${[...students.get(ivan)]}`); // Математика, История
-console.log(`Уроки Елена: ${[...students.get(elena)]}`); // Математика, История
+console.log(`Клиент ${[aleksey.name]} заказал: ${[...clients.get(aleksey)]}`);
 

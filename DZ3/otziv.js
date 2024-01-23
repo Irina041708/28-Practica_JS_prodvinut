@@ -54,20 +54,31 @@ function loadReviews() {
     productDiv.className = "product"; //и присваивается класс "product"
     productDiv.innerHTML = `${productName}`; //присваивается имя продукта.
     reviews[productName].forEach((review, index) => {
-      //ля каждого отзыва, связанного с товаром,
+      //для каждого отзыва, связанного с товаром,
       const reviewDiv = document.createElement("div"); //создается новый элемент
       reviewDiv.className = "review"; //которому присваивается класс review
-      reviewDiv.innerHTML = `${review};Удалить`;
+      reviewDiv.innerHTML = `${review}`;
+
+      const deleteButton = document.createElement("button");
+
+      deleteButton.textContent = "Удалить";
+
+      deleteButton.onclick = () => deleteReview(productName, reviewIndex);
+
+      reviewDiv.appendChild(deleteButton);
+
       productDiv.appendChild(reviewDiv); //к продукту добавляем отзыв
     });
     productsList.appendChild(productDiv); //с список продуктов добавляем отзыв о продукте
   });
 }
-function deleteReview(productName, reviewIndex) {//удаление конкретного отзыва.
+function deleteReview(productName, reviewIndex) {
+  //удаление конкретного отзыва.
   // принимает два параметра: название товара и индекс отзыва в массиве отзывов об этом товаре.
   const reviews = JSON.parse(localStorage.getItem("reviews")) || {}; //извлекает отзывы из localStorage и сохраняет их в переменной.
   reviews[productName].splice(reviewIndex, 1); //Конкретный отзыв удаляется из массива.
-  if (reviews[productName].length === 0) {//Если на товар больше нет отзывов,
+  if (reviews[productName].length === 0) {
+    //Если на товар больше нет отзывов,
     delete reviews[productName]; //товар удаляется из объекта отзывов.
   }
   localStorage.setItem("reviews", JSON.stringify(reviews)); //обновленный объект отзывов сохраняется в localStorage

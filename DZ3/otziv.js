@@ -63,7 +63,7 @@ function loadReviews() {
 
       deleteButton.textContent = "Удалить";
 
-      deleteButton.onclick = () => deleteReview(productName, reviewIndex);
+      deleteButton.onclick = () => deleteReview(productName,reviewIndex);
 
       reviewDiv.appendChild(deleteButton);
 

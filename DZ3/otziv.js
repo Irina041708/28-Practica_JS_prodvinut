@@ -63,7 +63,7 @@ function loadReviews() {
 
       deleteButton.textContent = "Удалить";
 
-      deleteButton.onclick = () => deleteReview(productName,reviewIndex);
+      deleteButton.onclick = () => deleteReview(productName);
 
       reviewDiv.appendChild(deleteButton);
 
@@ -72,11 +72,11 @@ function loadReviews() {
     productsList.appendChild(productDiv); //с список продуктов добавляем отзыв о продукте
   });
 }
-function deleteReview(productName, reviewIndex) {
+function deleteReview(productName) {
   //удаление конкретного отзыва.
   // принимает два параметра: название товара и индекс отзыва в массиве отзывов об этом товаре.
   const reviews = JSON.parse(localStorage.getItem("reviews")) || {}; //извлекает отзывы из localStorage и сохраняет их в переменной.
-  reviews[productName].splice(reviewIndex, 1); //Конкретный отзыв удаляется из массива.
+  reviews[productName].splice(productName,1); //Конкретный отзыв удаляется из массива.
   if (reviews[productName].length === 0) {
     //Если на товар больше нет отзывов,
     delete reviews[productName]; //товар удаляется из объекта отзывов.
